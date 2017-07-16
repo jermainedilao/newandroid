@@ -1,6 +1,6 @@
 # newandroid
 
-Simple list android app using Kotlin and new Android Architecture Components
+Simple android list app using Kotlin and new Android Architecture Components
 
 Libraries included:
  - Dagger 2
