@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">New Android</string>
+    <string name="hint_id">Input id here&#8230;</string>
+    <string name="hint_name">Name&#8230;</string>
+    <string name="hint_description">Description goes here&#8230;</string>
+    <string name="add">Add</string>
+    <string name="required">Required</string>
+</resources>
