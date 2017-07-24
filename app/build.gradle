@@ -34,6 +34,11 @@ android {
     configurations.all {
         // https://stackoverflow.com/a/37357786/5285687
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+
+        // https://github.com/nhaarman/mockito-kotlin/issues/146
+        resolutionStrategy {
+            force 'org.jetbrains.kotlin:kotlin-stdlib:1.1.3'
+        }
     }
 }
 
@@ -90,6 +95,11 @@ dependencies {
 
     // for Room RxJava support
     compile "android.arch.persistence.room:rxjava2:$android_architechture_components_version"
+
+    // RxJava
+    compile "io.reactivex.rxjava2:rxjava:$rxjava2_version"
+    compile "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    compile "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
 }
 repositories {
     mavenCentral()

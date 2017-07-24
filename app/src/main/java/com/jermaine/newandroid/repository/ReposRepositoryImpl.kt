@@ -7,6 +7,9 @@ import com.jermaine.newandroid.datamodel.database.NewAndroidDatabase
 import com.jermaine.newandroid.datamodel.repo.Repo
 import com.jermaine.newandroid.di.component.AppComponent
 import com.jermaine.newandroid.repository.callback.OnFetchReposCallback
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,17 +30,17 @@ class ReposRepositoryImpl(appComponent: AppComponent) : ReposRepository {
     }
 
     override fun save(repo: Repo) {
-        val executor = Executor {
-            Thread(it).start()
-        }
-        executor.execute({database.repoDao().save(repo)})
+        Single.fromCallable { database.repoDao().save(repo) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
     }
 
     override fun save(repoList: List<Repo>) {
-        val executor = Executor {
-            Thread(it).start()
-        }
-        executor.execute({database.repoDao().save(repoList)})
+        Single.fromCallable { {database.repoDao().save(repoList)} }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
     }
 
     override fun fetchRepos(callback: OnFetchReposCallback) {
